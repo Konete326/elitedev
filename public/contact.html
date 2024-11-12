@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Contact</title>
+<link rel="shortcut icon" href="assets/images/EliteDev Agency logo.png" type=image/svg+xml>
+<style>body{display:flex;justify-content:center;align-items:center;height:100vh;background-color:#171717;color:white;font-family:Arial,sans-serif}#container{width:100px;height:125px;margin:auto auto}.loading-title{display:block;text-align:center;font-size:20;font-family:'Inter',sans-serif;font-weight:bold;padding-bottom:15px;color:#888}.loading-circle{display:block;border-left:5px solid;border-top-left-radius:100%;border-top:5px solid;margin:5px;animation-name:Loader_611;animation-duration:1500ms;animation-timing-function:linear;animation-delay:0s;animation-iteration-count:infinite;animation-direction:normal;animation-fill-mode:forwards}.sp1{border-left-color:#f44336;border-top-color:#f44336;width:40px;height:40px}.sp2{border-left-color:#ffc107;border-top-color:#ffc107;width:30px;height:30px}.sp3{width:20px;height:20px;border-left-color:#8bc34a;border-top-color:#8bc34a}@keyframes Loader_611{0%{transform:rotate(0deg);transform-origin:right bottom}25%{transform:rotate(90deg);transform-origin:right bottom}50%{transform:rotate(180deg);transform-origin:right bottom}75%{transform:rotate(270deg);transform-origin:right bottom}100%{transform:rotate(360deg);transform-origin:right bottom}}.form{display:flex;flex-direction:column;align-self:center;font-family:inherit;gap:10px;padding-inline:2em;padding-bottom:.4em;background-color:#0a192f;border-radius:20px}.form-heading{text-align:center;margin:2em;color:#64ffda;font-size:1.2em;background-color:transparent;align-self:center}.form-field{display:flex;align-items:center;justify-content:center;gap:.5em;border-radius:10px;padding:.6em;border:0;outline:0;color:white;background-color:#171717;box-shadow:inset 2px 5px 10px #050505}.input-field{background:0;border:0;outline:0;width:100%;color:#ccd6f6;padding-inline:1em;border-radius:20px;font-size:medium}.sendMessage-btn{cursor:pointer;margin-bottom:3em;padding:1em;border-radius:10px;border:0;outline:0;background-color:transparent;color:#64ffda;font-weight:bold;outline:1px solid #64ffda;transition:all ease-in-out .3s}.sendMessage-btn:hover{background-color:#64ffda;color:#000;box-shadow:inset 2px 5px 10px #050505}.form-card1{background-image:linear-gradient(163deg,#64ffda 0,#64ffda 100%);border-radius:22px;transition:all .3s}.form-card1:hover{box-shadow:0 0 30px 1px rgba(100,255,218,0.3)}.form-card2{border-radius:0;transition:all .2s}.form-card2:hover{transform:scale(0.98);border-radius:20px}</style>
+</head>
+<body>
+<div class=form-card1>
+<div class=form-card2>
+<form class=form id=contactForm onsubmit=submitContactForm(event)>
+<p class=form-heading>Get In Touch</p>
+<div class=form-field>
+<input required placeholder=Name class=input-field type=text name=name />
+</div>
+<div class=form-field>
+<input required placeholder=Email class=input-field type=email name=email />
+</div>
+<div class=form-field>
+<input required placeholder=Subject class=input-field type=text name=subject />
+</div>
+<div class=form-field>
+<textarea required placeholder=Message cols=30 rows=3 class=input-field name=message></textarea>
+</div>
+<button type=submit class=sendMessage-btn>Send Message</button>
+<a href="index.html"class=sendMessage-btn style=text-align:center;text-decoration:none>Back</a>
+</form>
+</div>
+</div>
+<script>async function submitContactForm(event){event.preventDefault();const form=document.getElementById('contactForm');const formData=new FormData(form);const data=Object.fromEntries(formData);try{const response=await fetch('/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await response.json();if(response.ok){alert(result.message);form.reset();window.location.href='index.html';}else{alert(result.message);}}catch(error){console.error('Error:',error);alert('An error occurred while sending the message.');}}</script>
+<div id=container>
+<label class=loading-title>Loading ...</label>
+<span class="loading-circle sp1">
+<span class="loading-circle sp2">
+<span class="loading-circle sp3"></span>
+</span>
+</span>
+</div>
+<script>function loadPage(){setTimeout(()=>{document.getElementById('container').style.display='none';document.getElementById('content').style.display='block';},3000);}
+window.onload=loadPage;</script>
+</body>
+</html>
